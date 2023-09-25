@@ -13,7 +13,6 @@ profit_losses = []
 with open(csvfile, 'r') as budget_data:
     csvreader = csv.reader(budget_data, delimiter= ',')
     header = next(csvreader)
-    print(header)
 
     for row in csvreader: 
         date.append(str(row[0]))

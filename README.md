@@ -1,5 +1,5 @@
 # Python-Challenge
-In this challenge, we were given instructions to write two python scripts that accomplished a set of tasks for the two data sets that we were procided. To accomplish this challenge, we had to use the information that we learned in module 3 to execute creation of lists, directories, tuples, functions, loops, conditionals, print functions, file outputs, and more. Below are the instructions provided per data set.
+In this challenge, we were given instructions to write two Python scripts that accomplished a set of tasks for the two data sets that we were provided. To achieve this goal, we had to use the information we learned in module 3 to execute the creation of lists, directories, tuples, functions, loops, conditionals, print functions, file outputs, and more. Below are the instructions provided per data set.
 # PyBank
 For this data set, we were asked to generate the following:
 1. The total number of months included in the dataset

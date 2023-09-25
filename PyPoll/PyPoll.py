@@ -19,30 +19,29 @@ candidate_3_votes = 0
 with open(csvfile, 'r') as election_data:
     csvreader = csv.reader(election_data, delimiter= ',')
     header = next(csvreader)
-    print(header)
 
     for row in csvreader: 
         ballot_id.append(int(row[0]))
         county.append(str(row[1]))
         candidate.append(str(row[2]))
     
-    candidate_no_duplicates = list(set(candidate))
-    print(candidate_no_duplicates)
-    for word in candidate_no_duplicates:
-        print(word)
+    candidate_no_duplicates = tuple(set(candidate))
 
     # create loop and conditional to determine number of votes per candidate
-    for row in election_data:
-        if candidate == candidate_no_duplicates:
-            candidate_1_votes += 1
-        elif candidate == candidate_no_duplicates[1]:
-            candidate_2_votes += 1
-        elif candidate == candidate_no_duplicates[2]:
-            candidate_3_votes += 1
+    # for row in election_data:
+    #     if row[2] == candidate_no_duplicates[0]:
+    #         candidate_1_votes += 1
+    #     elif row[2] == candidate_no_duplicates[1]:
+    #         candidate_2_votes += 1
+    #     elif row[2] == candidate_no_duplicates[2]:
+    #         candidate_3_votes += 1
 
-    print(f'{candidate_no_duplicates[0]}: {candidate_1_votes}')
-    print(f'{candidate_no_duplicates[1]}: {candidate_2_votes}')
-    print(f'{candidate_no_duplicates[2]}: {candidate_3_votes}')
+    # print(f'{candidate_no_duplicates[0]}: {candidate_1_votes}')
+    # print(f'{candidate_no_duplicates[1]}: {candidate_2_votes}')
+    # print(f'{candidate_no_duplicates[2]}: {candidate_3_votes}')
+
+# find total number of votes
+total_votes = len(ballot_id)
 
 # create sum function
 def sum(election_data):
@@ -51,29 +50,63 @@ def sum(election_data):
         sum += number
     return sum
 
-# use sum function to calculate total number of votes
-total_votes = len(ballot_id)
-print(total_votes)
+# create function to calculate number of votes per candidate
+def votes(parameter1, parameter2):
+    sum = 0
+    for row in parameter1:
+        if row == parameter2:
+            sum +=1
+    return sum
 
-# create function to determine percentage of votes
+candidate_1_votes = votes(candidate, candidate_no_duplicates[0])
+candidate_2_votes = votes(candidate, candidate_no_duplicates[1])
+candidate_3_votes = votes(candidate, candidate_no_duplicates[2])
+
+# create dictionary with stats
+election_results = dict()
+election_results = {str(candidate_no_duplicates[0]): int(candidate_1_votes),
+            str(candidate_no_duplicates[1]): int(candidate_2_votes),
+            str(candidate_no_duplicates[2]): int(candidate_3_votes),}
+
+# create function to determine percentage of votes per candidate
 def percent_votes(holder):
-    votes = holder / len(ballot_id)
+    votes = (holder / total_votes) * 100
     return votes
-# use function to determine percentage of votes per candidate
-percent_votes_1 = percent_votes(candidate_1_votes)
-percent_votes_2 = percent_votes(candidate_2_votes)
-percent_votes_3 = percent_votes(candidate_3_votes)
 
-print(round(percent_votes_1, 0))
-print(round(percent_votes_2, 0))
-print(round(percent_votes_3, 0))
+percent_votes_1 = (round(percent_votes(candidate_1_votes), 3))
+percent_votes_2 = (round(percent_votes(candidate_2_votes), 3))
+percent_votes_3 = (round(percent_votes(candidate_3_votes), 3))
 
-# print results:
+# find the winner
+highest_votes = max(election_results.values())
+winner = max(election_results, key=election_results.get)
+print(f'{winner}: {highest_votes}')
+
+#  print results
 print('Election Results')
 print('_________________________________________')
 print('Total Votes: ' + str(total_votes))
 print('_________________________________________')
-print(str(candidate[0]) + ': ' + str(votes[0]))
-print(str(candidate[1]) + ': ' + str(votes[1]))
-print(str(candidate[2]) + ': ' + str(votes[2]))
-print('Greatest Decrease in Profits: ' + str(greatestd_month) + '($' + str(greatest_loss) + ')')
+print(f'{candidate_no_duplicates[0]} {percent_votes_1}% ({candidate_1_votes})')
+print(f'{candidate_no_duplicates[1]} {percent_votes_2}% ({candidate_2_votes})')
+print(f'{candidate_no_duplicates[2]} {percent_votes_3}% ({candidate_3_votes})')
+print('_________________________________________')
+print(f'Winner: {winner}')
+
+# specify file to write to
+output_path = '/Users/mshaaban/Desktop/Bootcamp/python-challenge/PyPoll/Analysis/PyPoll_Analysis.txt'
+
+# create output file
+with open(output_path, 'w') as PyPoll_Analysis:
+
+    # Write the rest of the rows
+    PyPoll_Analysis.write('Election Results\n')
+    PyPoll_Analysis.write('---------------------------------------\n')
+    PyPoll_Analysis.write(f'Total Votes: {total_votes} \n')
+    PyPoll_Analysis.write('---------------------------------------\n')
+    PyPoll_Analysis.write(f'{candidate_no_duplicates[0]}: {percent_votes_1}% ({candidate_1_votes})\n')
+    PyPoll_Analysis.write(f'{candidate_no_duplicates[1]}: {percent_votes_2}% ({candidate_2_votes})\n')
+    PyPoll_Analysis.write(f'{candidate_no_duplicates[2]}: {percent_votes_3}% ({candidate_3_votes})\n')
+    PyPoll_Analysis.write('---------------------------------------\n')
+    PyPoll_Analysis.write(f'Winner: {winner}\n')
+    PyPoll_Analysis.write('---------------------------------------\n')

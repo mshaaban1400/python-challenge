@@ -91,7 +91,7 @@ with open(output_path, 'w') as PyBank_Analysis:
     PyBank_Analysis.write('Financial Analysis\n')
     PyBank_Analysis.write('---------------------------------------\n')
     PyBank_Analysis.write(f'Total Months: {total_months} \n')
-    PyBank_Analysis.write(f'Total: $ {net_profit}\n')
+    PyBank_Analysis.write(f'Total: ${net_profit}\n')
     PyBank_Analysis.write(f'Average Change: $ {average_change}\n')
     PyBank_Analysis.write(f'Greatest Increase in Profits: {greatestp_month} (${greatest_profit})\n')
     PyBank_Analysis.write(f'Greatest Decrease in Profits: {greatestd_month} (${greatest_loss})\n')

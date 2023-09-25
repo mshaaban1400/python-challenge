@@ -3,7 +3,7 @@ import os
 import csv
 
 # create path to pybank.csv
-csvfile = '/Users/mshaaban/Desktop/Bootcamp/Personal Repo/02-Homework/03-Python/Starter_Code/PyBank/Resources/budget_data.csv'
+csvfile = '/Users/mshaaban/Desktop/Bootcamp/python-challenge/PyBank/Resources/budget_data.csv'
 
 # create lists for date and profits/losses
 date = []
@@ -19,15 +19,15 @@ with open(csvfile, 'r') as budget_data:
         date.append(str(row[0]))
         profit_losses.append(int(row[1]))
 
+# find to calculate total number of months
+total_months = len(date)
+
 # create sum function
 def sum(budget_data):
     sum = 0
     for number in budget_data:
         sum += number
     return sum
-
-# use sum function to calculate total number of months
-total_months = len(date)
 
 # use sum function to calculate net total profits/losses over the entire period
 net_profit = sum(profit_losses)
@@ -46,7 +46,7 @@ def avgchange(budget_data):
     return average
     
 # use the total_change function to find the average change in the profits/losses column
-average_change = avgchange(profit_losses)
+average_change = round(avgchange(profit_losses), 2)
 
 # create function to find the greatest increase in the profits/losses column
 def greatest_increase(budget_data, budget_date):
@@ -78,7 +78,21 @@ print('Financial Analysis')
 print('_________________________________________')
 print('Total Months: ' + str(total_months))
 print('Total: $' + str(net_profit))
-print('Average Change: $' + str(round(average_change, 2)))
+print('Average Change: $' + str(average_change))
 print('Greatest Increase in Profits: ' + str(greatestp_month) + '($' + str(greatest_profit) + ')')
 print('Greatest Decrease in Profits: ' + str(greatestd_month) + '($' + str(greatest_loss) + ')')
-      
+
+# specify file to write to
+output_path = '/Users/mshaaban/Desktop/Bootcamp/python-challenge/PyBank/Analysis/PyBank_Analysis.txt'
+
+# create output file
+with open(output_path, 'w') as PyBank_Analysis:
+
+    # Write the rest of the rows
+    PyBank_Analysis.write('Financial Analysis\n')
+    PyBank_Analysis.write('---------------------------------------\n')
+    PyBank_Analysis.write(f'Total Months: {total_months} \n')
+    PyBank_Analysis.write(f'Total: $ {net_profit}\n')
+    PyBank_Analysis.write(f'Average Change: $ {average_change}\n')
+    PyBank_Analysis.write(f'Greatest Increase in Profits: {greatestp_month} (${greatest_profit})\n')
+    PyBank_Analysis.write(f'Greatest Decrease in Profits: {greatestd_month} (${greatest_loss})\n')

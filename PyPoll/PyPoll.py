@@ -27,28 +27,8 @@ with open(csvfile, 'r') as election_data:
     
     candidate_no_duplicates = tuple(set(candidate))
 
-    # create loop and conditional to determine number of votes per candidate
-    # for row in election_data:
-    #     if row[2] == candidate_no_duplicates[0]:
-    #         candidate_1_votes += 1
-    #     elif row[2] == candidate_no_duplicates[1]:
-    #         candidate_2_votes += 1
-    #     elif row[2] == candidate_no_duplicates[2]:
-    #         candidate_3_votes += 1
-
-    # print(f'{candidate_no_duplicates[0]}: {candidate_1_votes}')
-    # print(f'{candidate_no_duplicates[1]}: {candidate_2_votes}')
-    # print(f'{candidate_no_duplicates[2]}: {candidate_3_votes}')
-
 # find total number of votes
 total_votes = len(ballot_id)
-
-# create sum function
-def sum(election_data):
-    sum = 0
-    for number in election_data:
-        sum += number
-    return sum
 
 # create function to calculate number of votes per candidate
 def votes(parameter1, parameter2):
@@ -56,7 +36,7 @@ def votes(parameter1, parameter2):
     for row in parameter1:
         if row == parameter2:
             sum +=1
-    return sum
+    return (round(sum, 2))
 
 candidate_1_votes = votes(candidate, candidate_no_duplicates[0])
 candidate_2_votes = votes(candidate, candidate_no_duplicates[1])
@@ -73,9 +53,9 @@ def percent_votes(holder):
     votes = (holder / total_votes) * 100
     return votes
 
-percent_votes_1 = (round(percent_votes(candidate_1_votes), 3))
-percent_votes_2 = (round(percent_votes(candidate_2_votes), 3))
-percent_votes_3 = (round(percent_votes(candidate_3_votes), 3))
+percent_votes_1 = percent_votes(candidate_1_votes)
+percent_votes_2 = percent_votes(candidate_2_votes)
+percent_votes_3 = percent_votes(candidate_3_votes)
 
 # find the winner
 highest_votes = max(election_results.values())

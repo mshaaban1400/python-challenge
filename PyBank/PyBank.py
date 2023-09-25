@@ -18,7 +18,7 @@ with open(csvfile, 'r') as budget_data:
         date.append(str(row[0]))
         profit_losses.append(int(row[1]))
 
-# find to calculate total number of months
+# find total number of months
 total_months = len(date)
 
 # create sum function

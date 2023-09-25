@@ -36,7 +36,7 @@ def votes(parameter1, parameter2):
     for row in parameter1:
         if row == parameter2:
             sum +=1
-    return (round(sum, 2))
+    return sum
 
 candidate_1_votes = votes(candidate, candidate_no_duplicates[0])
 candidate_2_votes = votes(candidate, candidate_no_duplicates[1])
@@ -51,7 +51,7 @@ election_results = {str(candidate_no_duplicates[0]): int(candidate_1_votes),
 # create function to determine percentage of votes per candidate
 def percent_votes(holder):
     votes = (holder / total_votes) * 100
-    return votes
+    return round(votes, 3)
 
 percent_votes_1 = percent_votes(candidate_1_votes)
 percent_votes_2 = percent_votes(candidate_2_votes)
